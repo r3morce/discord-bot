@@ -1,10 +1,13 @@
-# bot.py
+# Import stuff
 import os
+import random
 
 import discord
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# Read permission from another file .env
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 
@@ -13,6 +16,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 
+# Create custom discord.Client class
 class aclient(discord.Client):
     def __init__(self):
         super().__init__(intents=intents)
@@ -25,25 +29,29 @@ class aclient(discord.Client):
         print(f"Say hi to {self.user}!")
 
 
+# Init custom client
 client = aclient()
 
 
+# Read messages and respond
 @client.event
 async def on_message(message):
-    # This checks if the message is not from the bot itself. If it is, it'll ignore the message.
     if message.author == client.user:
         return
 
-    # From here, you can add all the rules and the behaviour of the bot.
-    # In this case, the bot checks if the content of the message is "Hello!" and send a message if it's true.
-    if message.content == 'Hello!':
-        await message.channel.send("Hello! I'm happy to see you around here.")
-        return
+    brooklyn_99_quotes = [
+        'I\'m the human form of the 💯 emoji.',
+        'Bingpot!',
+        (
+            'Cool. Cool cool cool cool cool cool cool, '
+            'no doubt no doubt no doubt no doubt.'
+        ),
+    ]
 
-    if message.content == 'Good bye!':
-        await message.channel.send("Hope to see you soon!")
-        return
+    if message.content == '99!':
+        response = random.choice(brooklyn_99_quotes)
+        await message.channel.send(response)
 
 
-# add the token of your bot
+# Add the token (permission) of your bot
 client.run(TOKEN)
