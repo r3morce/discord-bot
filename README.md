@@ -18,3 +18,7 @@ A discord bot for testing
 - See response
 - ???
 - Profit
+
+## Good to know
+
+This is a local running bot. If the program does not run, the bot does not work on the Discord server.
